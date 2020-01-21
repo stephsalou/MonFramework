@@ -9,7 +9,7 @@
 namespace Tests\Framework;
 
 
-use Framework\Renderer;
+use Framework\Renderer\PHPRenderer;
 use PHPUnit\Framework\TestCase;
 
 
@@ -19,8 +19,7 @@ class RendererTest extends TestCase
 
     public function setUp(): void
     {
-        $this->renderer = new Renderer();
-        $this->renderer->addPath(__DIR__."/views");
+        $this->renderer = new PHPRenderer(__DIR__."/views");
     }
 
 
@@ -33,7 +32,6 @@ class RendererTest extends TestCase
 
     public function testRenderTheDefaultPath()
     {
-
         $content = $this->renderer->render('demo');
         $this->assertEquals('Salut les gens',$content);
     }

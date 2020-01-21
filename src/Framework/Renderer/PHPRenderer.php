@@ -6,9 +6,9 @@
  * Time: 15:38
  */
 
-namespace Framework;
+namespace Framework\Renderer;
 
-class Renderer
+class PHPRenderer implements RendererInterface
 {
 
     const DEFAULT_NAMESPACE = "__MAIN";
@@ -20,13 +20,20 @@ class Renderer
      */
     private $globals = [];
 
+    public function __construct(string $defaultPath = null)
+    {
+        if (!is_null($defaultPath)) {
+            $this->addPath($defaultPath);
+        }
+    }
+
     /**
      * add a path to load views
      * @param string $namespace
      * @param string|null $path
      *
      */
-    public function addPath(string $namespace, string $path = null): void
+    public function addPath(string $namespace, string $path = null) : void
     {
         if (is_null($path)) {
             $this->paths[self::DEFAULT_NAMESPACE] = $namespace;
