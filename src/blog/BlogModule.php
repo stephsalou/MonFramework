@@ -13,8 +13,11 @@ class BlogModule extends Module
 
     const DEFINITIONS = __DIR__.DIRECTORY_SEPARATOR.'config.php';
 
-    public function __construct(string $prefix, Router $router, RendererInterface $renderer)
+    public function __construct(string $prefix=null, Router $router, RendererInterface $renderer)
     {
+        if (is_null($prefix)){
+            $prefix='/blog';
+        }
         $renderer->addPath('blog', __DIR__.DIRECTORY_SEPARATOR.'views');
         $router->get($prefix, BlogAction::class, 'blog.index');
         $router->get($prefix.'/{slug:[a-zA-Z0-9\-]+}', BlogAction::class, 'blog.show');
