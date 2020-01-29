@@ -13,7 +13,6 @@ use Twig\Loader\FilesystemLoader;
 
 class TwigRenderer implements RendererInterface
 {
-
     private $twig;
     private $loader;
 

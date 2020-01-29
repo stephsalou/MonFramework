@@ -7,10 +7,10 @@ use function DI\create;
 use function DI\get;
 use function DI\factory;
 use function DI\autowire;
+use function PHPSTORM_META\type;
+
 var_dump(TwigRendererFactory::class);
-//var_dump((new TwigRendererFactory)());
-var_dump(get_class_methods(TwigRendererFactory::class));
-die();
+
 return [
     'views.path' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views',
 //    RendererInterface::class =>object(TwigRenderer::class)->constructor(get('views.path')),
@@ -21,5 +21,5 @@ return [
 ////        return $container->get(TwigRendererFactory::class);
 //    }),
 //    RendererInterface::class => factory([TwigRendererFactory::class,'create']),
-    RendererInterface::class => factory(new TwigRendererFactory()),
+    RendererInterface::class => factory(TwigRendererFactory::class),
 ];

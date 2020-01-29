@@ -4,6 +4,6 @@ use function \DI\get ;
 use function \DI\create ;
 
 return [
-//    'blog.prefix'=> '/blog',
+    'blog.prefix'=> '/blog',
 //    BlogModule::class => create()->constructor(get('blog.prefix'))
 ];

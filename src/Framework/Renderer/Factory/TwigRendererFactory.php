@@ -8,7 +8,6 @@
 
 namespace Framework\Renderer\Factory;
 
-
 use Framework\Renderer\TwigRenderer;
 use Framework\Router\RouterTwigExtension;
 use Psr\Container\ContainerInterface;
@@ -18,28 +17,8 @@ use Twig\Loader\FilesystemLoader;
 class TwigRendererFactory
 {
 
-    public function __construct():
-    {
-
-    }
-
     public function __invoke(ContainerInterface $container) : TwigRenderer
     {
-        var_dump($container);
-        die();
-
-        $view_path = $container->get('views.path');
-        $loader = new FilesystemLoader($view_path);
-        $twig = new Environment($loader);
-        $twig->addExtension($container->get(RouterTwigExtension::class));
-        return new TwigRenderer($loader, $twig);
-    }
-
-
-    public static function create(ContainerInterface $container) : TwigRenderer
-    {
-        var_dump($container);
-        die();
         $view_path = $container->get('views.path');
         $loader = new FilesystemLoader($view_path);
         $twig = new Environment($loader);
