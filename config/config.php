@@ -16,6 +16,7 @@ return [
     'database.password'=>'root',
     'database.name'=>'grafikartpoo',
     'views.path' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views',
+    'base_dir' => dirname(__DIR__),
     'twig.extensions' => [
         get(RouterTwigExtension::class)
     ],

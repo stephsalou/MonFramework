@@ -8,6 +8,7 @@
 
 use DI\ContainerBuilder;
 use Framework\App;
+use Framework\Renderer\RendererInterface;
 use GuzzleHttp\Psr7\ServerRequest;
 
 require dirname(__DIR__).'/vendor/autoload.php';

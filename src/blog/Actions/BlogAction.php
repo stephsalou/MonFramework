@@ -24,7 +24,7 @@ class BlogAction
      */
     private $router;
 
-    public function __construct(RendererInterface $renderer,\PDO $pdo,Router $router)
+    public function __construct(RendererInterface $renderer, \PDO $pdo, Router $router)
     {
 
         $this->renderer = $renderer;
@@ -46,7 +46,7 @@ class BlogAction
         $posts = $this->pdo
             ->query("SELECT * FROM posts ORDER BY created_at DESC LIMIT 10")
             ->fetchAll();
-        return $this->renderer->render('@blog/index',['posts'=>$posts]);
+        return $this->renderer->render('@blog/index', ['posts'=>$posts]);
     }
 
 
@@ -62,14 +62,14 @@ class BlogAction
         $query->execute([$request->getAttribute('id')]);
         $post = $query->fetch();
 
-        if ($post->slug !== $slug){
-            $redirectUri = $this->router->generateUri('blog.show',[
+        if ($post->slug !== $slug) {
+            $redirectUri = $this->router->generateUri('blog.show', [
                 'slug'=>$post->slug,
                 'id'=>$post->id
             ]);
             return (new Response())
                 ->withStatus(301)
-                ->withHeader('location',$redirectUri);
+                ->withHeader('location', $redirectUri);
         }
         return $this->renderer->render('@blog/show', [
             'post'=>$post
