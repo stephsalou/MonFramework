@@ -9,6 +9,7 @@
 namespace Tests\Framework;
 
 
+use Framework\Renderer\Factory\TwigRendererFactory;
 use Framework\Renderer\TwigRenderer;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +20,8 @@ class RendererTest extends TestCase
 
     public function setUp(): void
     {
-        $this->renderer = new TwigRenderer(__DIR__."/views");
+//        __DIR__."/views"
+        $this->renderer = new TwigRendererFactory();
     }
 
 
@@ -50,5 +52,15 @@ class RendererTest extends TestCase
         $this->renderer->addGlobal('nom','stephane');
         $content = $this->renderer->render('demoparams');
         $this->assertEquals('Salut stephane',$content);
+    }
+
+    public function testGetAssetsContent()
+    {
+        $path = "C:/Users/Sandra/Desktop/steph/project_php/grafikart/MonFramework/assets/style/bootstrap.css";
+
+        $data = file_get_contents($path);
+
+        var_dump($data);
+        die();
     }
 }

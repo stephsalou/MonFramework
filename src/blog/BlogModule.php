@@ -24,7 +24,9 @@ class BlogModule extends Module
         if (is_null($prefix)) {
             $prefix='/blog';
         }
+        //http://localhost:8000/static/style/bootstrap.css
         $renderer->addPath('blog', __DIR__.DIRECTORY_SEPARATOR.'views');
+
         $router->get($prefix, BlogAction::class, 'blog.index');
         $router->get($prefix.'/{slug:[a-zA-Z0-9\-]+}-{id:[0-9]+}', BlogAction::class, 'blog.show');
     }

@@ -16,6 +16,7 @@
 
 namespace Framework;
 
+use Framework\Middleware\AssetsMiddleware;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
 use Psr\Container\ContainerInterface;
@@ -72,7 +73,11 @@ class App
                 ->withStatus(301)
                 ->withHeader('Location', substr($uri, 0, -1));
         }
+        $static_path = '/static/{path:[a-zA-Z0-9\-\.\_]+}/{name:[a-zA-Z0-9\-\.\_]+}/{type:[a-zA-Z0-9\-\.\_\/]+}';
         $this->router = $this->container->get(Router::class);
+        $this->
+        router->
+        get($static_path, AssetsMiddleware::class, 'static.files');
         $route = $this->router->match($request);
         if (is_null($route)) {
             return $response = new Response(404, [], '<h1>Erreur 404</h1>');

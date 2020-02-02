@@ -9,7 +9,10 @@
 namespace Framework\Router;
 
 use Framework\Router;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -46,10 +49,9 @@ class RouterTwigExtension extends AbstractExtension
         return $this->router->generateUri($path, $params);
     }
 
-    public function loadAssets($path, $name)
+    public function loadAssets($path, $name, $type)
     {
-
-        $dir = $this->container->get('base_dir');
-        return $dir.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.$path.DIRECTORY_SEPARATOR.$name;
+        $type = str_replace('.', '/', $type);
+        return '/static/'.$path.'/'.$name.'/'.$type;
     }
 }

@@ -49,7 +49,8 @@ class Router
     public function match(ServerRequestInterface $request) : ?Route
     {
 //        try{
-
+//            var_dump($request);
+//            die();
             $result = $this->router->match($request);
         if ($result->isSuccess()) {
             return new Route(
