@@ -17,8 +17,9 @@ class PostSeeder extends AbstractSeed
     {
         $data = [];
         $faker = Faker\Factory::create('fr_FR');
-        $date = $faker->unixTime('now');
+
         for ($i = 0; $i<100; $i++) {
+            $date = $faker->unixTime('now');
             $data[]=[
                 'name'=> $faker->sentence(),
                 'slug'=> $faker->slug,

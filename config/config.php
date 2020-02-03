@@ -7,6 +7,9 @@ use function DI\create;
 use function DI\get;
 use function DI\factory;
 use Framework\Router\RouterTwigExtension;
+use Framework\Twig\PagerFantaExtension;
+use Framework\Twig\TextExtension;
+use Framework\Twig\TimeExtension;
 use Psr\Container\ContainerInterface;
 
 
@@ -18,7 +21,11 @@ return [
     'views.path' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views',
     'base_dir' => dirname(__DIR__),
     'twig.extensions' => [
-        get(RouterTwigExtension::class)
+        get(RouterTwigExtension::class),
+        get(PagerFantaExtension::class),
+        get(TextExtension::class),
+        get(TimeExtension::class),
+
     ],
     Router::class => create(),
     RendererInterface::class => factory(TwigRendererFactory::class),

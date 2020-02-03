@@ -49,6 +49,10 @@
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="{{ assets('script','jquery_3-4-1','min.js') }}"></script>
+<script src="{{ assets('script','timeago','full.min.js') }}"></script>
 <script src="{{ assets('script','bootstrap','js') }}"></script>
+<script>
+    timeago.render(document.querySelectorAll('.timeago'),'fr');
+</script>
 </body>
 </html>
