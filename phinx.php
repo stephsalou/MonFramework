@@ -21,6 +21,7 @@ return [
         'seeds' => $seeds
     ],
     'environments'=>[
+        'default_database'=>'development',
         'development'=>[
             'adapter'=> 'mysql',
             'host'=> $app->getContainer()->get('database.host'),
@@ -29,7 +30,8 @@ return [
             'pass'=> $app->getContainer()->get('database.password'),
             'port'=> 3306,
             'charset'=> 'utf8'
-            ]
+            ],
+
 
     ]
 
