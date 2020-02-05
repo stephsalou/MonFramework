@@ -13,14 +13,14 @@ class BlogModule extends Module
 
     const DEFINITIONS = __DIR__.DIRECTORY_SEPARATOR.'config.php';
 
-
     const MIGRATIONS = __DIR__.'/db/migrations';
-
 
     const SEEDS = __DIR__.'/db/seeds';
 
     public function __construct(string $prefix = null, Router $router, RendererInterface $renderer)
     {
+
+
         if (is_null($prefix)) {
             $prefix='/blog';
         }

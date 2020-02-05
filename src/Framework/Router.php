@@ -42,16 +42,17 @@ class Router
     {
         $this->router->addRoute(new ZendRoute($path, $callable, ['GET'], $name));
     }
+
     /**
      * @param ServerRequestInterface $request
      * @return Route|null
      */
-    public function match(ServerRequestInterface $request) : ?Route
+    public function match(ServerRequestInterface $request): ?Route
     {
 //        try{
 //            var_dump($request);
 //            die();
-            $result = $this->router->match($request);
+        $result = $this->router->match($request);
         if ($result->isSuccess()) {
             return new Route(
                 $result->getMatchedRouteName(),
@@ -69,13 +70,13 @@ class Router
 
 
     /**
-     *@return string|null
+     * @return string|null
      */
-    public function generateUri(string $name, array $params = [], array $queryParams = []) : ?string
+    public function generateUri(string $name, array $params = [], array $queryParams = []): ?string
     {
         $uri = $this->router->generateUri($name, $params);
         if (!empty($queryParams)) {
-            return $uri.'?'.http_build_query($queryParams);
+            return $uri . '?' . http_build_query($queryParams);
         }
         return $uri;
     }

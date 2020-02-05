@@ -11,12 +11,15 @@ use Framework\App;
 use Framework\Renderer\RendererInterface;
 use GuzzleHttp\Psr7\ServerRequest;
 
+
+
 require dirname(__DIR__).'/vendor/autoload.php';
 
 $modules = [
     \App\Blog\BlogModule::class,
-];
+    \App\Admin\AdminModule::class,
 
+];
 $builder = new ContainerBuilder();
 $builder->addDefinitions(dirname(__DIR__).DIRECTORY_SEPARATOR.'config/config.php');
 

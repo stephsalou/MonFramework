@@ -24,9 +24,9 @@ class DatabaseTestCase extends TestCase
      */
     protected $pdo;
 
-    protected bool $seeds = true;
+    protected $seeds = true;
 
-    private Manager $manager;
+    private $manager;
 
     public function setUp() :void
     {

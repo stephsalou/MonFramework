@@ -56,6 +56,7 @@ class PostTable
             );
             $pagerFanta = (new Pagerfanta($query))
                 ->setMaxPerPage($perPage);
+
             $lastPage = $pagerFanta->getNbPages();
             return $pagerFanta->setCurrentPage($lastPage);
         }
