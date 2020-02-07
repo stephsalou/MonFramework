@@ -7,27 +7,35 @@ use Framework\Module;
 //use Framework\PHPRenderer;
 use Framework\Renderer\RendererInterface;
 use Framework\Router;
+use Psr\Container\ContainerInterface;
 
 class BlogModule extends Module
 {
 
-    const DEFINITIONS = __DIR__.DIRECTORY_SEPARATOR.'config.php';
+    const DEFINITIONS = __DIR__ . DIRECTORY_SEPARATOR . 'config.php';
 
-    const MIGRATIONS = __DIR__.'/db/migrations';
+    const MIGRATIONS = __DIR__ . '/db/migrations';
 
-    const SEEDS = __DIR__.'/db/seeds';
+    const SEEDS = __DIR__ . '/db/seeds';
 
-    public function __construct(string $prefix = null, Router $router, RendererInterface $renderer)
+    public function __construct(ContainerInterface $container)
     {
 
 
-        if (is_null($prefix)) {
-            $prefix='/blog';
-        }
-        //http://localhost:8000/static/style/bootstrap.css
-        $renderer->addPath('blog', __DIR__.DIRECTORY_SEPARATOR.'views');
-
+        //if ($prefix === null) {
+        //    $prefix='/blog';
+        //}
+        $container->get(RendererInterface::class)->addPath('blog', __DIR__ . DIRECTORY_SEPARATOR . 'views');
+        $router = $container->get(Router::class);
+        $prefix = $container->get('blog.prefix');
         $router->get($prefix, BlogAction::class, 'blog.index');
-        $router->get($prefix.'/{slug:[a-zA-Z0-9\-]+}-{id:[0-9]+}', BlogAction::class, 'blog.show');
+        $router->get($prefix . '/{slug:[a-zA-Z0-9\-]+}-{id:[0-9]+}', BlogAction::class, 'blog.show');
+
+        if($container->has('admin.prefix')){
+
+            $prefix = $container->get('admin.prefix');
+            $router->get("$prefix/posts", BlogAction::class, 'admin.blog.index');
+        }
+
     }
 }

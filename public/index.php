@@ -8,7 +8,6 @@
 
 use DI\ContainerBuilder;
 use Framework\App;
-use Framework\Renderer\RendererInterface;
 use GuzzleHttp\Psr7\ServerRequest;
 
 
@@ -24,7 +23,7 @@ $builder = new ContainerBuilder();
 $builder->addDefinitions(dirname(__DIR__).DIRECTORY_SEPARATOR.'config/config.php');
 
 foreach ($modules as $module) {
-    if (!is_null($module::DEFINITIONS) && is_string($module::DEFINITIONS)) {
+    if ($module::DEFINITIONS !== null && is_string($module::DEFINITIONS)) {
         $builder->addDefinitions($module::DEFINITIONS);
     }
 }
@@ -34,7 +33,7 @@ $container = $builder->build();
 
 $app = new App($container, $modules);
 
-if (php_sapi_name() !== 'cli') {
+if (PHP_SAPI !== 'cli') {
     $response = $app->run(ServerRequest::fromGlobals());
 
     \Http\Response\send($response);

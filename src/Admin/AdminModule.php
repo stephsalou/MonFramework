@@ -9,6 +9,9 @@ use Framework\Renderer\RendererInterface;
 class AdminModule extends Module{
 
 
+
+    const DEFINITIONS = __DIR__.DIRECTORY_SEPARATOR.'config.php';
+
     /**
      * @var RendererInterface
      */
