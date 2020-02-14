@@ -21,11 +21,7 @@ class BlogModule extends Module
 
     public function __construct(ContainerInterface $container)
     {
-
-
-        //if ($prefix === null) {
-        //    $prefix='/blog';
-        //}
+        
         $container->get(RendererInterface::class)->addPath('blog', __DIR__ . DIRECTORY_SEPARATOR . 'views');
         $router = $container->get(Router::class);
         $prefix = $container->get('blog.prefix');
@@ -35,12 +31,6 @@ class BlogModule extends Module
         if ($container->has('admin.prefix')) {
             $prefix = $container->get('admin.prefix');
             $router->crud("$prefix>posts", AdminBlogAction::class, 'blog.admin');
-            $router->get("$prefix/posts", AdminBlogAction::class, 'blog.admin.index');
-            $router->get("$prefix/posts/new", AdminBlogAction::class, 'blog.admin.create');
-            $router->get("$prefix/posts/{id:\d+}", AdminBlogAction::class, 'blog.admin.edit');
-            $router->delete("$prefix/posts/{id:\d+}", AdminBlogAction::class, 'blog.admin.delete');
-            $router->post("$prefix/posts/{id:\d+}", AdminBlogAction::class);
-            $router->post("$prefix/posts/new", AdminBlogAction::class);
         }
     }
 }
