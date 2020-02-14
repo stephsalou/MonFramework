@@ -6,7 +6,8 @@ namespace App\Admin;
 use Framework\Module;
 use Framework\Renderer\RendererInterface;
 
-class AdminModule extends Module{
+class AdminModule extends Module
+{
 
 
 
@@ -25,7 +26,6 @@ class AdminModule extends Module{
     {
         $this->renderer = $renderer;
 
-        $this->renderer->addPath('admin',__DIR__.'/views');
+        $this->renderer->addPath('admin', __DIR__.'/views');
     }
-
 }

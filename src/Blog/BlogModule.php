@@ -2,6 +2,7 @@
 
 namespace App\Blog;
 
+use App\Blog\Actions\AdminBlogAction;
 use App\Blog\Actions\BlogAction;
 use Framework\Module;
 //use Framework\PHPRenderer;
@@ -31,11 +32,15 @@ class BlogModule extends Module
         $router->get($prefix, BlogAction::class, 'blog.index');
         $router->get($prefix . '/{slug:[a-zA-Z0-9\-]+}-{id:[0-9]+}', BlogAction::class, 'blog.show');
 
-        if($container->has('admin.prefix')){
-
+        if ($container->has('admin.prefix')) {
             $prefix = $container->get('admin.prefix');
-            $router->get("$prefix/posts", BlogAction::class, 'admin.blog.index');
+            $router->crud("$prefix>posts", AdminBlogAction::class, 'blog.admin');
+            $router->get("$prefix/posts", AdminBlogAction::class, 'blog.admin.index');
+            $router->get("$prefix/posts/new", AdminBlogAction::class, 'blog.admin.create');
+            $router->get("$prefix/posts/{id:\d+}", AdminBlogAction::class, 'blog.admin.edit');
+            $router->delete("$prefix/posts/{id:\d+}", AdminBlogAction::class, 'blog.admin.delete');
+            $router->post("$prefix/posts/{id:\d+}", AdminBlogAction::class);
+            $router->post("$prefix/posts/new", AdminBlogAction::class);
         }
-
     }
 }

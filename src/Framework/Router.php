@@ -38,11 +38,42 @@ class Router
      * @param callable|string $callable
      * @param string $name
      */
-    public function get(string $path, $callable, string $name)
+    public function get(string $path, $callable, ?string $name = null)
     {
         $this->router->addRoute(new ZendRoute($path, $callable, ['GET'], $name));
     }
 
+    /**
+     * @param string $path
+     * @param callable|string $callable
+     * @param string $name
+     */
+    public function post(string $path, $callable, ?string $name = null)
+    {
+        $this->router->addRoute(new ZendRoute($path, $callable, ['POST'], $name));
+    }
+
+    public function delete(string $path, $callable, ?string $name = null)
+    {
+        $this->router->addRoute(new ZendRoute($path, $callable, ['DELETE'], $name));
+    }
+
+
+    /**
+     * Generate crud Url
+     * @param string $prefixPath
+     * @param $callable
+     * @param string $prefixName
+     */
+    public function crud(string $prefixPath, $callable, string $prefixName)
+    {
+        $this->get("$prefixPath/posts", $callable, "$prefixName.index");
+        $this->get("$prefixPath/posts/new", $callable, "$prefixName.create");
+        $this->get("$prefixPath/posts/{id:\d+}", $callable, "$prefixName.edit");
+        $this->delete("$prefixPath/posts/{id:\d+}", $callable, "$prefixName.delete");
+        $this->post("$prefixPath/posts/{id:\d+}", $callable);
+        $this->post("$prefixPath/posts/new", $callable);
+    }
     /**
      * @param ServerRequestInterface $request
      * @return Route|null
@@ -59,9 +90,9 @@ class Router
                 $result->getMatchedMiddleware(),
                 $result->getMatchedParams()
             );
-        } else {
-            return null;
         }
+
+        return null;
 //        }catch(\Exception $e){
 //            print($e);
 //            return null;

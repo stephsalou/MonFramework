@@ -40,9 +40,9 @@ class BlogAction
     {
         if ($request->getAttribute('id')) {
             return $this->show($request);
-        } else {
-            return $this->index($request);
         }
+
+        return $this->index($request);
     }
 
     public function index(Request $request): string
