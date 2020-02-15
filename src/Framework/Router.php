@@ -9,8 +9,6 @@
 namespace Framework;
 
 use Framework\Router\Route;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Expressive\Router\FastRouteRouter;
 use Zend\Expressive\Router\Route as ZendRoute;
@@ -40,6 +38,7 @@ class Router
      */
     public function get(string $path, $callable, ?string $name = null)
     {
+
         $this->router->addRoute(new ZendRoute($path, $callable, ['GET'], $name));
     }
 
@@ -65,14 +64,14 @@ class Router
      * @param $callable
      * @param string $prefixName
      */
-    public function crud(string $prefixPath, $callable, string $prefixName)
+    public function crud(string $prefixPath, $callable, string $prefixName): void
     {
-        $this->get("$prefixPath/posts", $callable, "$prefixName.index");
-        $this->get("$prefixPath/posts/new", $callable, "$prefixName.create");
-        $this->get("$prefixPath/posts/{id:\d+}", $callable, "$prefixName.edit");
-        $this->delete("$prefixPath/posts/{id:\d+}", $callable, "$prefixName.delete");
-        $this->post("$prefixPath/posts/{id:\d+}", $callable);
-        $this->post("$prefixPath/posts/new", $callable);
+        $this->get("$prefixPath", $callable, "$prefixName.index");
+        $this->get("$prefixPath/new", $callable, "$prefixName.create");
+        $this->get("$prefixPath/{id:\d+}", $callable, "$prefixName.edit");
+        $this->delete("$prefixPath/{id:\d+}", $callable, "$prefixName.delete");
+        $this->post("$prefixPath/{id:\d+}", $callable);
+        $this->post("$prefixPath/new", $callable);
     }
     /**
      * @param ServerRequestInterface $request

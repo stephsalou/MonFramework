@@ -27,6 +27,18 @@
     </div>
 </nav>
 <div class="container">
+    {% if flash('success') %}
+        <div class="alert alert-success" role="alert">
+            <strong>{{ flash('success') }}</strong>
+        </div>
+    {% endif %}
+    {% if flash('error') %}
+        <div class="alert alert-danger" role="alert">
+            <strong>{{ flash('error') }}</strong>
+        </div>
+    {% endif %}
+
+
     {% block body %}{% endblock %}
 
 </div>

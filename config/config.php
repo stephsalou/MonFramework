@@ -1,5 +1,6 @@
 <?php
 
+use App\Framework\Twig\FlashExtension;
 use Framework\Renderer\RendererInterface;
 use Framework\Renderer\Factory\TwigRendererFactory;
 use Framework\Router;
@@ -7,6 +8,8 @@ use function DI\create;
 use function DI\get;
 use function DI\factory;
 use Framework\Router\RouterTwigExtension;
+use Framework\Session\PHPSession;
+use Framework\Session\SessionInterface;
 use Framework\Twig\PagerFantaExtension;
 use Framework\Twig\TextExtension;
 use Framework\Twig\TimeExtension;
@@ -25,8 +28,9 @@ return [
         get(PagerFantaExtension::class),
         get(TextExtension::class),
         get(TimeExtension::class),
-
+        get(FlashExtension::class),
     ],
+    SessionInterface::class=> create(PHPSession::class),
     Router::class => create(),
     RendererInterface::class => factory(TwigRendererFactory::class),
     \PDO::class => function(ContainerInterface $container){

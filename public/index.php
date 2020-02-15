@@ -19,7 +19,6 @@ $modules = [
 ];
 $builder = new ContainerBuilder();
 $builder->addDefinitions(dirname(__DIR__).DIRECTORY_SEPARATOR.'config/config.php');
-
 foreach ($modules as $module) {
     if ($module::DEFINITIONS !== null && is_string($module::DEFINITIONS)) {
         $builder->addDefinitions($module::DEFINITIONS);
@@ -28,7 +27,6 @@ foreach ($modules as $module) {
 $builder->addDefinitions(dirname(__DIR__).DIRECTORY_SEPARATOR.'config.php');
 
 $container = $builder->build();
-
 $app = new App($container, $modules);
 
 if (PHP_SAPI !== 'cli') {
