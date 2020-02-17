@@ -1,13 +1,3 @@
-<div class="form-group">
-    {{ dump(errors) }}
-    <label for="name">Titre de l'article</label>
-    <input type="text" class="form-control" name="name" id="name" value="{{ item.name }}">
-</div>
-<div class="form-group">
-    <label for="slug">le Slug de l'article</label>
-    <input type="text" class="form-control" name="slug" id="slug" value="{{ item.slug }}">
-</div>
-<div class="form-group">
-    <label for="content">Le contenu de l'article</label>
-    <textarea class="form-control" name="content" id="content" rows="8">{{ item.content }}</textarea>
-</div>
+{{ field('name',item.name,"titre de l'article ") }}
+{{ field('slug',item.slug,"slug") }}
+{{ field('content',item.content,"content",{type:'textarea'}) }}

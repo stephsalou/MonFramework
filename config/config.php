@@ -10,6 +10,7 @@ use function DI\factory;
 use Framework\Router\RouterTwigExtension;
 use Framework\Session\PHPSession;
 use Framework\Session\SessionInterface;
+use Framework\Twig\FormExtension;
 use Framework\Twig\PagerFantaExtension;
 use Framework\Twig\TextExtension;
 use Framework\Twig\TimeExtension;
@@ -29,6 +30,7 @@ return [
         get(TextExtension::class),
         get(TimeExtension::class),
         get(FlashExtension::class),
+        get(FormExtension::class),
     ],
     SessionInterface::class=> create(PHPSession::class),
     Router::class => create(),
